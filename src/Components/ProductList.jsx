@@ -34,13 +34,12 @@ width:100%;
 `
 
 const FilterContainer = styled.div`
-border:2px solid black;
 overflow:hidden;
 border-radius:1rem;
 width:22%;
 padding:0.5rem;
 height:max-content;
-${small({width:"10rem",padding:"0.1rem"})}
+${small({width:"14rem",padding:"0.1rem"})}
 `
 const GenderContainer = styled.div`
 display:flex;
@@ -187,7 +186,7 @@ const btnStyle={color:"red"}
  return (
   <MainContainer>
    <FilterContainer>
-          <h3>Filters</h3>
+          <h3>FILTERS</h3>
           <h4>Gender</h4>
           <Button style={btnStyle} variant="text" onClick={() => {
                    dispatch({ type: "ClearGender" })
@@ -274,8 +273,6 @@ const btnStyle={color:"red"}
    {loading ?
  <LoaderContainer>
 <ClipLoader color="gold" loading={loading}  size={60} />
-      <h3 style={{ margin:"1rem 0",letterSpacing:"1px",fontSize: "1.5rem" }}>
-                Fetching your products..</h3>
          </LoaderContainer>
 
     :
