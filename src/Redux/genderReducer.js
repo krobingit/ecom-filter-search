@@ -27,6 +27,15 @@ gender
      }
 
     }
+    case "ClearGender":
+    {
+
+     return {
+      ...state,
+    gender: []
+     }
+
+    }
   default:
   return state
 

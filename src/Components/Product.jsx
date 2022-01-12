@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import SimpleImageSlider from "react-simple-image-slider";
 import Rating from '@mui/material/Rating';
-import { small } from "./responsive";
+import { small } from "../responsive";
 
 const ProductCard = styled.div`
   width: min-content;

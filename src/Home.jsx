@@ -1,8 +1,12 @@
 import styled from 'styled-components';
-import { ProductList } from './ProductList';
+import { ProductList } from './Components/ProductList';
 import { Input } from 'semantic-ui-react';
 import { small } from './responsive';
 import { useState } from 'react';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
+import { IconButton } from '@mui/material';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 const Container = styled.div`
 `
@@ -24,6 +28,9 @@ position:sticky;
 top:0;
 z-index:1000;
 `
+const NavActions = styled.div`
+margin-left:3rem;
+`
 export function Home() {
 
  const [search, setSearch] = useState("");
@@ -33,8 +40,12 @@ export function Home() {
        <NavContainer>
       <SearchInput onChange={(e)=>setSearch(e.target.value)}
         icon={{ name: 'search', circular: true, link: true }}
-     placeholder='Search...'  />
-
+             placeholder='Search...' />
+          <NavActions>
+             <IconButton><ShoppingCartIcon style={{color:"white"}}/></IconButton>
+             <IconButton><ShoppingBagIcon style={{ color: "white" }} /></IconButton>
+              <IconButton><AccountCircleIcon style={{ color: "white" }} /></IconButton>
+             </NavActions>
     </NavContainer>
 
    <ProductList search={search} />

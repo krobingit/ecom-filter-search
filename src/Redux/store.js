@@ -6,6 +6,7 @@ import { genderReducer } from "./genderReducer";
 import { brandReducer } from "./brandReducer";
 import { categoryReducer } from "./categoryReducer";
 
+
 const enhancers = redux.compose(
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
@@ -27,7 +28,7 @@ transforms: [
 const rootReducer = redux.combineReducers({
  gender: genderReducer,
  brand: brandReducer,
- category:categoryReducer
+ category: categoryReducer
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
-import { Product } from './Product';
+import { Product } from '../Components/Product';
 import { Gender } from './Components/GenderComponent';
 import { Brand } from './Components/BrandComponent';
 import ClipLoader from "react-spinners/ClipLoader";
@@ -91,8 +91,14 @@ setLoading(true)
       //getting category filter values in an array
       var categoryValues = productsList.filters.primaryFilters[6].filterValues.map((category) => category.id)
      setcategoryValues(categoryValues);
+     //getting rating filter values in an array
+     var ratingValues = [5, 4, 3, 2, 1]
+      //getting price filter values in an array
 
-   const { products } = productsList;
+//getting year filter values in an array
+     var yearValues = [2015,2016,2017,2018,2019]
+     const { products } = productsList;
+
      console.log(productsList)
 
 
@@ -163,7 +169,10 @@ setLoading(true)
              : <ExpandMoreIcon style={{cursor:"pointer"}} onClick={() => setshowCategory(!showCategory)} />}</h4 >
           {
              showCategory && <>
-                <Button variant="text" onClick={() => dispatch({ type: "ClearCategories" })}>Clear Categories</Button>
+                <Button variant="text" onClick={() => {
+                   dispatch({ type: "ClearCategories" })
+                }
+                }>Clear Categories</Button>
                 <BrandContainer>
 
                    {categoryValues &&
@@ -195,6 +204,12 @@ setLoading(true)
              </BrandContainer>
              </>
           }
+          <Line />
+          <h4>Price Range</h4>
+          <Line />
+          <h4>Rating</h4>
+          <Line />
+          <h4>Year</h4>
    </FilterContainer>
    {loading ?
  <LoaderContainer>
