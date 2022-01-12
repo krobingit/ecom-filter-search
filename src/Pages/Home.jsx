@@ -1,13 +1,13 @@
 import styled from 'styled-components';
-import { ProductList } from './Components/ProductList';
+import { ProductList } from '../Components/ProductList';
 import { Input } from 'semantic-ui-react';
-import { small } from './responsive';
+import { small } from '../responsive';
 import { useState } from 'react';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import { IconButton } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import { Header } from './Header';
+import { Header } from '../Header';
 
 const Container = styled.div`
 `
