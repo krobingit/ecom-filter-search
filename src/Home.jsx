@@ -7,6 +7,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import { IconButton } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { Header } from './Header';
 
 const Container = styled.div`
 `
@@ -44,11 +45,13 @@ export function Home() {
           <NavActions>
              <IconButton><ShoppingCartIcon style={{color:"white"}}/></IconButton>
              <IconButton><ShoppingBagIcon style={{ color: "white" }} /></IconButton>
-              <IconButton><AccountCircleIcon style={{ color: "white" }} /></IconButton>
+             <IconButton><AccountCircleIcon style={{ color: "white" }} /></IconButton>
              </NavActions>
-    </NavContainer>
+       </NavContainer>
+              <Header />
 
-   <ProductList search={search} />
+       <ProductList search={search} />
+
    </Container>
 
 
