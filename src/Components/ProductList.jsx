@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { Product } from './Product';
 import { Gender } from './GenderComponent';
 import { Brand } from './BrandComponent';
-import ClipLoader from "react-spinners/ClipLoader";
+import PacmanLoader from "react-spinners/PacmanLoader";
 import { Button } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { small } from "../responsive";
@@ -62,6 +62,7 @@ width:100%;
 
 function ProductList({search})
 {
+      const [showgender, setshowGender] = useState(false);
    const [showBrands, setshowBrands] = useState(false);
    const [showCategory, setshowCategory] = useState(false);
    const dispatch = useDispatch();
@@ -187,17 +188,22 @@ const btnStyle={color:"red"}
   <MainContainer>
    <FilterContainer>
           <h3>FILTERS</h3>
-          <h4>Gender</h4>
-          <Button style={btnStyle} variant="text" onClick={() => {
+          <h4>Gender {showgender ? <ExpandLessIcon style={{cursor:"pointer"}} onClick={() => setshowGender(!showgender)} />
+             : <ExpandMoreIcon style={{cursor:"pointer"}} onClick={() => setshowGender(!showgender)} />}</h4>
+          {
+             showgender && <>
+                <Button style={btnStyle} variant="text" onClick={() => {
                    dispatch({ type: "ClearGender" })
                 }
-                }><DeleteOutlineIcon/></Button>
-          { genderValues &&
-             genderValues.map((genderValue,idx) =>
-                <GenderContainer>
-                   <Gender key={idx} genderValue={genderValue} filters={filters} setFilters={setFilters} />
-                   </GenderContainer>
+                }><DeleteOutlineIcon /></Button>
+                {genderValues &&
+                   genderValues.map((genderValue, idx) =>
+                      <GenderContainer>
+                         <Gender key={idx} genderValue={genderValue} filters={filters} setFilters={setFilters} />
+                      </GenderContainer>
                    )
+                }
+             </>
           }
           <Line/>
           <h4>Categories {showCategory ? <ExpandLessIcon style={{cursor:"pointer"}} onClick={() => setshowCategory(!showCategory)} />
@@ -272,7 +278,7 @@ const btnStyle={color:"red"}
    </FilterContainer>
    {loading ?
  <LoaderContainer>
-<ClipLoader color="gold" loading={loading}  size={60} />
+<PacmanLoader color="gold" loading={loading}  size={30} />
          </LoaderContainer>
 
     :
