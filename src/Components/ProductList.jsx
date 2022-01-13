@@ -158,11 +158,9 @@ function ProductList({ search }) {
               setLoading(true);
             }
             if (key === "price") {
-              let start = filters["price"];
-              let end = filters["price"];
-              console.log(start);
+              let PRICE = filters["price"];
               filteredProducts = filteredProducts.filter(
-                (product) => product.price > start[0] && product.price < end[1]
+                (product) => product.price > PRICE[0] && product.price < PRICE[1]
               );
               setProducts(filteredProducts);
               setLoading(true);
