@@ -13,6 +13,8 @@ import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import { Rating } from "./RatingComponent";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { Year } from "./YearComponent";
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 const Products = styled.div`
   display: flex;
@@ -69,7 +71,11 @@ function ProductList({ search }) {
   const [brandValues, setbrandValues] = useState(null);
   const [categoryValues, setcategoryValues] = useState(null);
   const [price, setPrice] = useState(null);
-  const [filters, setFilters] = useState({
+  const dispatch = useDispatch();
+  const { gender } = useSelector(state => state.gender);
+  const { category } = useSelector(state => state.category);
+   const { brand} = useSelector(state => state.brand);
+  const [filters,setFilters] = useState({
     gender: [],
     category: [],
     brand: [],
@@ -244,7 +250,8 @@ function ProductList({ search }) {
               style={btnStyle}
               variant="text"
               onClick={() => {
-                setFilters({...filters,gender:[]});
+                dispatch({ type:"ClearGender"})
+                setFilters({...filters,gender});
               }}
             >
               <DeleteOutlineIcon />
@@ -283,7 +290,8 @@ function ProductList({ search }) {
               style={btnStyle}
               variant="text"
               onClick={() => {
-            setFilters({...filters,category:[]});
+          dispatch({ type:"ClearCategories"})
+                setFilters({...filters,category});
               }}
             >
               <DeleteOutlineIcon />
@@ -321,7 +329,12 @@ function ProductList({ search }) {
             <Button
               style={btnStyle}
               variant="text"
-              onClick={() => setFilters({...filters,brand:[]})}
+              onClick={() =>
+{
+                dispatch({ type:"ClearBrands"})
+                setFilters({...filters,brand});
+
+}}
             >
               <DeleteOutlineIcon />
             </Button>
