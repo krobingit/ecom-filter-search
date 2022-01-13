@@ -238,9 +238,9 @@ function ProductList({ search }) {
             dispatch({ type: "ClearCategories" });
             dispatch({ type: "ClearBrands" });
             setFilters({
-              gender,
-              category,
-              brand,
+              gender:[],
+              category:[],
+              brand:[],
               rating: [],
               price: [],
               year: [],
