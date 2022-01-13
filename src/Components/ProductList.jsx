@@ -13,8 +13,8 @@ import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import { Rating } from "./RatingComponent";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { Year } from "./YearComponent";
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 const Products = styled.div`
   display: flex;
@@ -72,10 +72,10 @@ function ProductList({ search }) {
   const [categoryValues, setcategoryValues] = useState(null);
   const [price, setPrice] = useState(null);
   const dispatch = useDispatch();
-  const { gender } = useSelector(state => state.gender);
-  const { category } = useSelector(state => state.category);
-   const { brand} = useSelector(state => state.brand);
-  const [filters,setFilters] = useState({
+  const { gender } = useSelector((state) => state.gender);
+  const { category } = useSelector((state) => state.category);
+  const { brand } = useSelector((state) => state.brand);
+  const [filters, setFilters] = useState({
     gender: [],
     category: [],
     brand: [],
@@ -166,15 +166,13 @@ function ProductList({ search }) {
             if (key === "price") {
               let PRICE = filters["price"];
               filteredProducts = filteredProducts.filter(
-                (product) => product.price > PRICE[0] && product.price < PRICE[1]
+                (product) =>
+                  product.price > PRICE[0] && product.price < PRICE[1]
               );
               filteredProducts.sort((a, b) => {
-                if (a.price > b.price)
-                  return 1;
-                else
-                  return -1;
-
-              })
+                if (a.price > b.price) return 1;
+                else return -1;
+              });
               setProducts(filteredProducts);
               setLoading(true);
             }
@@ -182,13 +180,10 @@ function ProductList({ search }) {
               filteredProducts = filteredProducts.filter(
                 (product) => Math.round(product.rating) >= filters["rating"][0]
               );
-               filteredProducts.sort((a, b) => {
-                if (a.rating > b.rating)
-                  return 1;
-                else
-                  return -1;
-
-              })
+              filteredProducts.sort((a, b) => {
+                if (a.rating > b.rating) return 1;
+                else return -1;
+              });
               setProducts(filteredProducts);
               setLoading(true);
             }
@@ -216,16 +211,19 @@ function ProductList({ search }) {
         <h3>FILTERS</h3>
         <Button
           style={btnStyle}
-          onClick={() =>
+          onClick={() => {
+            dispatch({ type: "ClearGender" });
+            dispatch({ type: "ClearCategories" });
+            dispatch({ type: "ClearBrands" });
             setFilters({
-              gender: [],
-              category: [],
-              brand: [],
+              gender,
+              category,
+              brand,
               rating: [],
               price: [],
               year: [],
-            })
-          }
+            });
+          }}
         >
           Clear All Filters
           <DeleteOutlineIcon />
@@ -250,8 +248,8 @@ function ProductList({ search }) {
               style={btnStyle}
               variant="text"
               onClick={() => {
-                dispatch({ type:"ClearGender"})
-                setFilters({...filters,gender});
+                dispatch({ type: "ClearGender" });
+                setFilters({ ...filters, gender });
               }}
             >
               <DeleteOutlineIcon />
@@ -290,8 +288,8 @@ function ProductList({ search }) {
               style={btnStyle}
               variant="text"
               onClick={() => {
-          dispatch({ type:"ClearCategories"})
-                setFilters({...filters,category});
+                dispatch({ type: "ClearCategories" });
+                setFilters({ ...filters, category });
               }}
             >
               <DeleteOutlineIcon />
@@ -329,12 +327,10 @@ function ProductList({ search }) {
             <Button
               style={btnStyle}
               variant="text"
-              onClick={() =>
-{
-                dispatch({ type:"ClearBrands"})
-                setFilters({...filters,brand});
-
-}}
+              onClick={() => {
+                dispatch({ type: "ClearBrands" });
+                setFilters({ ...filters, brand });
+              }}
             >
               <DeleteOutlineIcon />
             </Button>
@@ -383,7 +379,6 @@ function ProductList({ search }) {
         {yearValues.map((year) => (
           <Year year={year} filters={filters} setFilters={setFilters} />
         ))}
-
       </FilterContainer>
       {loading ? (
         <LoaderContainer>
