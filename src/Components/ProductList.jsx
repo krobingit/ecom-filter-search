@@ -162,6 +162,13 @@ function ProductList({ search }) {
               filteredProducts = filteredProducts.filter(
                 (product) => product.price > PRICE[0] && product.price < PRICE[1]
               );
+              filteredProducts.sort((a, b) => {
+                if (a.price > b.price)
+                  return 1;
+                else
+                  return -1;
+
+              })
               setProducts(filteredProducts);
               setLoading(true);
             }
@@ -169,6 +176,13 @@ function ProductList({ search }) {
               filteredProducts = filteredProducts.filter(
                 (product) => Math.round(product.rating) >= filters["rating"][0]
               );
+               filteredProducts.sort((a, b) => {
+                if (a.rating > b.rating)
+                  return 1;
+                else
+                  return -1;
+
+              })
               setProducts(filteredProducts);
               setLoading(true);
             }
