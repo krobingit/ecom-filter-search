@@ -5,7 +5,6 @@ import { Gender } from "./GenderComponent";
 import { Brand } from "./BrandComponent";
 import PacmanLoader from "react-spinners/PacmanLoader";
 import { Button } from "@mui/material";
-import { useDispatch } from "react-redux";
 import { small } from "../responsive";
 import { Category } from "./CategoryComponent";
 import { Price } from "./PriceRangeComponent";
@@ -64,7 +63,6 @@ function ProductList({ search }) {
   const [showgender, setshowGender] = useState(false);
   const [showBrands, setshowBrands] = useState(false);
   const [showCategory, setshowCategory] = useState(false);
-  const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const [products, setProducts] = useState(null);
   const [genderValues, setgenderValues] = useState(null);
@@ -198,6 +196,22 @@ function ProductList({ search }) {
     <MainContainer>
       <FilterContainer>
         <h3>FILTERS</h3>
+        <Button
+          style={btnStyle}
+          onClick={() =>
+            setFilters({
+              gender: [],
+              category: [],
+              brand: [],
+              rating: [],
+              price: [],
+              year: [],
+            })
+          }
+        >
+          Clear All Filters
+          <DeleteOutlineIcon />
+        </Button>
         <h4>
           Gender{" "}
           {showgender ? (
@@ -218,7 +232,7 @@ function ProductList({ search }) {
               style={btnStyle}
               variant="text"
               onClick={() => {
-                dispatch({ type: "ClearGender" });
+                setFilters({...filters,gender:[]});
               }}
             >
               <DeleteOutlineIcon />
@@ -257,7 +271,7 @@ function ProductList({ search }) {
               style={btnStyle}
               variant="text"
               onClick={() => {
-                dispatch({ type: "ClearCategories" });
+            setFilters({...filters,category:[]});
               }}
             >
               <DeleteOutlineIcon />
@@ -295,7 +309,7 @@ function ProductList({ search }) {
             <Button
               style={btnStyle}
               variant="text"
-              onClick={() => dispatch({ type: "ClearBrands" })}
+              onClick={() => setFilters({...filters,brand:[]})}
             >
               <DeleteOutlineIcon />
             </Button>
@@ -344,22 +358,7 @@ function ProductList({ search }) {
         {yearValues.map((year) => (
           <Year year={year} filters={filters} setFilters={setFilters} />
         ))}
-        <Button
-          style={btnStyle}
-          onClick={() =>
-            setFilters({
-              gender: [],
-              category: [],
-              brand: [],
-              rating: [],
-              price: [],
-              year: [],
-            })
-          }
-        >
-          Clear All Filters
-          <DeleteOutlineIcon />
-        </Button>
+
       </FilterContainer>
       {loading ? (
         <LoaderContainer>
