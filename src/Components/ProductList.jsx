@@ -75,6 +75,7 @@ function ProductList({ search }) {
   const { gender } = useSelector((state) => state.gender);
   const { category } = useSelector((state) => state.category);
   const { brand } = useSelector((state) => state.brand);
+  const [productsList, setProductsList] = useState(null);
   const [filters, setFilters] = useState({
     gender: [],
     category: [],
@@ -90,10 +91,6 @@ function ProductList({ search }) {
   useEffect(() => {
     const getProducts = async () => {
       setLoading(true);
-      const res = await fetch("https://demo7303877.mockable.io/", {
-        method: "GET",
-      });
-      const productsList = await res.json();
       //getting gender filter values in an array
       var genderValues =
         productsList.filters.primaryFilters[3].filterValues.map(
@@ -202,7 +199,21 @@ function ProductList({ search }) {
       setProducts(filteredProducts);
     };
     getProducts();
-  }, [search, filters]);
+  }, [search, filters,productsList]);
+
+
+    useEffect(() => {
+      const getProducts = async () => {
+
+        setLoading(true);
+        const res = await fetch("https://demo7303877.mockable.io/", {
+          method: "GET",
+        });
+        const productsList = await res.json();
+        setProductsList(productsList)
+      }
+    getProducts();
+  }, []);
 
   const btnStyle = { color: "red" };
   return (
