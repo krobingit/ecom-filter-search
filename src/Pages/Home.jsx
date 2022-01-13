@@ -49,7 +49,6 @@ export function Home() {
              </NavActions>
        </NavContainer>
               <Header />
-
        <ProductList search={search} />
 
    </Container>

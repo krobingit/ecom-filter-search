@@ -60,6 +60,11 @@ const Line = styled.div`
   border: 1px dashed darkgray;
   width: 100%;
 `;
+const ProductCount = styled.div`
+color:blue;
+display:flex;
+justify-content:center;
+`
 
 function ProductList({ search }) {
   const [showgender, setshowGender] = useState(false);
@@ -88,8 +93,21 @@ function ProductList({ search }) {
   var ratingValues = [4, 3, 2, 1];
   //getting year filter values in an array
   var yearValues = [2015, 2016, 2017, 2018, 2019];
-  useEffect(() => {
-    const getProducts = async () => {
+    useEffect(() => {
+      const getProducts = async () => {
+
+        setLoading(true);
+        const res = await fetch("https://demo7303877.mockable.io/", {
+          method: "GET",
+        });
+        const productsList = await res.json();
+        setProductsList(productsList)
+      }
+    getProducts();
+    }, []);
+
+    useEffect(() => {
+    const filterProducts = async () => {
       setLoading(true);
       //getting gender filter values in an array
       var genderValues =
@@ -198,28 +216,21 @@ function ProductList({ search }) {
       setLoading(false);
       setProducts(filteredProducts);
     };
-    getProducts();
+    filterProducts();
   }, [search, filters,productsList]);
-
-
-    useEffect(() => {
-      const getProducts = async () => {
-
-        setLoading(true);
-        const res = await fetch("https://demo7303877.mockable.io/", {
-          method: "GET",
-        });
-        const productsList = await res.json();
-        setProductsList(productsList)
-      }
-    getProducts();
-  }, []);
 
   const btnStyle = { color: "red" };
   return (
     <MainContainer>
       <FilterContainer>
         <h3>FILTERS</h3>
+         <ProductCount>
+           {
+             (products && products.length > 0) ?
+              <p>{products.length} Products Found</p> :
+                  <p>No results found</p>
+            }
+            </ProductCount>
         <Button
           style={btnStyle}
           onClick={() => {
@@ -396,8 +407,12 @@ function ProductList({ search }) {
           <PacmanLoader color="gold" loading={loading} size={30} />
         </LoaderContainer>
       ) : (
-        <Products>
-          {products &&
+<>
+
+
+
+              <Products>
+            {products &&
             products.map(
               ({
                 productId,
@@ -424,7 +439,8 @@ function ProductList({ search }) {
                 />
               )
             )}
-        </Products>
+            </Products>
+            </>
       )}
     </MainContainer>
   );
