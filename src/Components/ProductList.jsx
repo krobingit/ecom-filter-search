@@ -57,7 +57,7 @@ const BrandContainer = styled.div`
   margin-bottom: 1rem;
 `;
 const Line = styled.div`
-  border: 1px dashed darkgray;
+  border: 1px solid darkgray;
   width: 100%;
 `;
 const ProductCount = styled.div`
@@ -77,9 +77,6 @@ function ProductList({ search }) {
   const [categoryValues, setcategoryValues] = useState(null);
   const [price, setPrice] = useState(null);
   const dispatch = useDispatch();
-  const { gender } = useSelector((state) => state.gender);
-  const { category } = useSelector((state) => state.category);
-  const { brand } = useSelector((state) => state.brand);
   const [productsList, setProductsList] = useState(null);
   const [filters, setFilters] = useState({
     gender: [],
@@ -271,7 +268,7 @@ function ProductList({ search }) {
               variant="text"
               onClick={() => {
                 dispatch({ type: "ClearGender" });
-                setFilters({ ...filters, gender });
+                setFilters({ ...filters, gender:[] });
               }}
             >
               <DeleteOutlineIcon />
@@ -311,7 +308,7 @@ function ProductList({ search }) {
               variant="text"
               onClick={() => {
                 dispatch({ type: "ClearCategories" });
-                setFilters({ ...filters, category });
+                setFilters({ ...filters, category:[] });
               }}
             >
               <DeleteOutlineIcon />
@@ -351,7 +348,7 @@ function ProductList({ search }) {
               variant="text"
               onClick={() => {
                 dispatch({ type: "ClearBrands" });
-                setFilters({ ...filters, brand });
+                setFilters({ ...filters, brand:[] });
               }}
             >
               <DeleteOutlineIcon />
