@@ -35,6 +35,7 @@ margin-left:3rem;
 export function Home() {
 
  const [search, setSearch] = useState("");
+   const styles = { color: "white" };
  return (
 
   <Container>
@@ -43,9 +44,9 @@ export function Home() {
         icon={{ name: 'search', circular: true, link: true }}
              placeholder='Search...' />
           <NavActions>
-             <IconButton><ShoppingCartIcon style={{color:"white"}}/></IconButton>
-             <IconButton><ShoppingBagIcon style={{ color: "white" }} /></IconButton>
-             <IconButton><AccountCircleIcon style={{ color: "white" }} /></IconButton>
+             <IconButton><ShoppingCartIcon style={styles}/></IconButton>
+             <IconButton><ShoppingBagIcon style={styles} /></IconButton>
+             <IconButton><AccountCircleIcon style={styles} /></IconButton>
              </NavActions>
        </NavContainer>
               <Header />

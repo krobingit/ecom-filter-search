@@ -14,7 +14,6 @@ import { Rating } from "./RatingComponent";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { Year } from "./YearComponent";
 import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
 
 const Products = styled.div`
   display: flex;
